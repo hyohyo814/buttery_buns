@@ -2,8 +2,13 @@
   "name": "butterybuns",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "db:push": "bunx drizzle-kit push:sqlite",
+    "db:studio": "bunx drizzle-kit studio"
+  },
   "devDependencies": {
     "bun-types": "latest",
+    "drizzle-kit": "^0.19.13",
     "typed-html": "^3.0.1"
   },
   "peerDependencies": {
@@ -11,6 +16,9 @@
   },
   "dependencies": {
     "@elysiajs/html": "^0.6.5",
+    "@libsql/client": "^0.3.5-pre.1",
+    "better-sqlite3": "^8.6.0",
+    "drizzle-orm": "^0.28.6",
     "elysia": "^0.6.23"
   }
 }
