@@ -2,8 +2,8 @@ import html from "@elysiajs/html";
 import { Elysia, t } from "elysia";
 import * as elements from "typed-html";
 import { db } from "./db";
-import { SelectTodo, InsertTodo, todos } from "./db/schema"; 
-import { eq } from "drizzle-orm";
+import { todos } from "./db/schema"; 
+import { eq, like } from "drizzle-orm";
 
 const app = new Elysia()
   .use(html())
@@ -84,7 +84,7 @@ const BaseHtml = ({ children }: elements.Children) => `
   <title>Buttery Buns</title>
   <script src="https://unpkg.com/htmx.org@1.9.5"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/hyperscript.org@0.9.9"></script>
+  <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
 </head>
 
 ${children}
@@ -123,10 +123,10 @@ function TodoItem({ content, completed, id }: Todo) {
 function TodoList({ todos }: { todos: Todo[] }) {
   return (
     <div>
+      <TodoForm />
       {todos.map(todo => (
         <TodoItem {...todo} />
       ))}
-      <TodoForm />
     </div>
   )
 }
@@ -136,8 +136,8 @@ function TodoForm() {
     <form
       class="flex flex-row space-x-3"
       hx-post="/todos"
-      hx-swap="beforebegin"
-      _="target.reset()"
+      hx-swap="afterend"
+      _="on submit target.reset()"
     >
       <input type="text" name="content" class="border border-black" />
       <button type="submit">Add</button>
