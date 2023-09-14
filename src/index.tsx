@@ -3,7 +3,7 @@ import { Elysia, t } from "elysia";
 import * as elements from "typed-html";
 import { db } from "./db";
 import { todos } from "./db/schema"; 
-import { eq, like } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 const app = new Elysia()
   .use(html())
