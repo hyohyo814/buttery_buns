@@ -4,6 +4,8 @@ import * as elements from "typed-html";
 import { db } from "./db";
 import { todos } from "./db/schema"; 
 import { eq } from "drizzle-orm";
+import { TodoItem } from "./components/TodoItem";
+import { TodoList } from "./components/TodoList";
 
 const app = new Elysia()
   .use(html())
@@ -90,57 +92,3 @@ const BaseHtml = ({ children }: elements.Children) => `
 ${children}
 `;
 
-type Todo = {
-  id: number;
-  content: string;
-  completed: boolean;
-};
-
-
-function TodoItem({ content, completed, id }: Todo) {
-  return (
-    <div class="flex flex-row space-x-3">
-      <p>{content}</p>
-      <input
-        type="checkbox"
-        checked={completed}
-        hx-post={`/todos/toggle/${id}`}
-        hx-target="closest div"
-        hx-swap="outerHTML"
-      />
-      <button
-        class="text-red-500"
-        hx-delete={`/todos/${id}`}
-        hx-swap="outerHTML"
-        hx-target="closest div"
-      >
-        X
-      </button>
-    </div>
-  )
-}
-
-function TodoList({ todos }: { todos: Todo[] }) {
-  return (
-    <div>
-      <TodoForm />
-      {todos.map(todo => (
-        <TodoItem {...todo} />
-      ))}
-    </div>
-  )
-}
-
-function TodoForm() {
-  return (
-    <form
-      class="flex flex-row space-x-3"
-      hx-post="/todos"
-      hx-swap="afterend"
-      _="on submit target.reset()"
-    >
-      <input type="text" name="content" class="border border-black" />
-      <button type="submit">Add</button>
-    </form>
-  )
-}
