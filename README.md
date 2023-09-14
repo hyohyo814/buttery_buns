@@ -10,4 +10,4 @@ DATABASE_URL and DATABASE_TOKEN for sqlite db
 
 bun run dev - run local server \
 bun run db:push - push sqlite db \
-bun run db:studio - open drizzle studio \ 
+bun run db:studio - open drizzle studio 
