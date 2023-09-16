@@ -6,6 +6,7 @@ import { todos } from "./db/schema";
 import { eq } from "drizzle-orm";
 import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
+import { BaseHtml } from "./templates";
 
 const app = new Elysia()
   .use(html())
@@ -75,20 +76,4 @@ const app = new Elysia()
   .listen(3000);
 
 console.log(`Elysia running at http://${app.server?.hostname}:${app.server?.port}`);
-
-const BaseHtml = ({ children }: elements.Children) => `
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buttery Buns</title>
-  <script src="https://unpkg.com/htmx.org@1.9.5"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
-</head>
-
-${children}
-`;
 

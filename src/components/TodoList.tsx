@@ -11,10 +11,37 @@ type Todo = {
 export function TodoList({ todos }: { todos: Todo[] }) {
   return (
     <div>
+      <button
+        class=""
+        id="row"
+        _="
+        on click toggle .text-red-500 on me
+        "
+      >
+        Row
+      </button>
+      <button
+        class=""
+        id="column"
+        _="
+        on click toggle.text-blue-500 on me
+        "
+      >
+        Column
+      </button>
       <TodoForm />
-      {todos.map(todo => (
-        <TodoItem {...todo} />
-      ))}
+      <input
+        class="my-2 border border-black"
+        placeholder="Filter..."
+        _="on keyup show <div /> in #display
+          when it's innerHTML contains my value"
+      >
+      </input>
+      <div id="display">
+        {todos.map(todo => (
+          <TodoItem {...todo} />
+        ))}
+      </div>
     </div>
   )
 }
