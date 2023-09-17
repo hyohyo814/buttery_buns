@@ -13,11 +13,33 @@ const app = new Elysia()
   .get("/", ({ html }) => html(
     <BaseHtml>
       <body
-        class="flex w-full h-screen justify-center items-center text-4xl"
-        hx-get="/todos"
-        hx-trigger="load"
-        hx-swap="innerHtml"
-      />
+        class="gap-x-12 flex w-full h-screen
+        justify-center items-center text-4xl"
+      >
+        <div
+          id="base-display"
+          hx-swap="innerHTML"/>
+        <button
+          hidden={false}
+          class="" 
+          hx-target="#base-display"
+          hx-trigger="click"
+          hx-get="/todos"
+          _="on click toggle my .hidden"
+        >
+          Todos
+        </button>
+        <button
+          id="wsbutton"
+          hidden={false}
+          class=""
+          hx-target="#base-display"
+          hx-get="/chat"
+          _="on click toggle my .hidden"
+        >
+          Websockets
+        </button>
+      </body>
     </BaseHtml>
   ))
   .get("/todos", async () => {
@@ -77,3 +99,6 @@ const app = new Elysia()
 
 console.log(`Elysia running at http://${app.server?.hostname}:${app.server?.port}`);
 
+function Chat() {
+
+}
