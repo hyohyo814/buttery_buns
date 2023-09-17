@@ -17,12 +17,12 @@ export function TodoItem({ content, completed, id }: Todo) {
         hx-post={`/todos/toggle/${id}`}
         hx-target="closest div"
         hx-swap="outerHTML"
-        _="on click"
       />
       <label
         for={`checkbox/${id}`}
         id={`item/${id}`}
-        class="h-full w-full peer-checked:text-pink-500 hover:bg-sky-500"
+        class="h-full w-full
+        peer-checked:text-pink-500 hover:bg-sky-500"
       >
         {content}
       </label>
