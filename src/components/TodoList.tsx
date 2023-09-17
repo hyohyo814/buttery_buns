@@ -34,7 +34,7 @@ export function TodoList({ todos }: { todos: Todo[] }) {
         class="my-2 border border-black"
         placeholder="Filter..."
         _="on keyup show <div /> in #display
-          when it's innerHTML contains my value"
+          when it's innerHTML.toLowerCase() contains my value.toLowerCase()"
       >
       </input>
       <div id="display">
